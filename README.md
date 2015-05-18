@@ -1,4 +1,2 @@
-rdb-fullstack
-=============
-
-Common code for the Relational Databases and Full Stack Fundamentals courses
+# udacity-p3
+Item Catalog
