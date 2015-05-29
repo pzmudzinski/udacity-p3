@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Delete Category</h1>
+  <form method="POST" >
+      {{ form.hidden_tag() }}
+      CATEGORY:
+      <p>{{ form.category }} <p>
+      Are you sure you want to delete?
+      <input type="submit" value="DELETE"></p>
+  </form>
+{% endblock %}

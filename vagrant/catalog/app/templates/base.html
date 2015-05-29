@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>CATALOG</title>
+</head>
+<body>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+            <li>{{ message }} </li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+    <a href="{{ url_for('.add_item') }}"">ADD ITEM</a>
+    <a href="{{ url_for('.add_category') }}"">ADD CATEGORY</a>
+    <a href="{{ url_for('.delete_category') }}">DELETE CATEGORY</a>
+    <div>Item Catalog: <a href="/catalog">Home</a></div>
+    <div>Categories:
+        {% for category in categories %}
+        <a href="{{ url_for('.category', category_id=category.id) }}" target="_self">{{ category.name }}</a>
+        {% endfor %}
+    </div>
+    <hr>
+    {% block content %}{% endblock %}
+</body>
+</html>

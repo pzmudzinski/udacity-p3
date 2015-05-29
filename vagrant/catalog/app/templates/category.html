@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>{{ category.name }}</h1>
+    <div>
+        <h2>ITEMS({{ number_of_items }})</h2>
+        <ul>
+            {% for item in items %}
+            <li><a href="{{ url_for('.item', item_id=item.id) }}" target="_self">{{ item.name }}</a></li>
+            {% endfor %}
+        </ul>
+
+    </div>
+    <!--{% for post in posts %}-->
+    <!--<div><p>{{ post.author.nickname }} says: <b>{{ post.body }}</b></p></div>-->
+    <!--{% endfor %}-->
+{% endblock %}

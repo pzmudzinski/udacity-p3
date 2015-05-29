@@ -1,0 +1,16 @@
+{% import '_forms.html' as forms %}
+{% extends "base.html" %}
+
+{% block content %}
+{% block form %}
+<h1>{{ action }} Item</h1>
+  <form method="POST" >
+      {{ form.hidden_tag() }}
+
+      {{ forms.render(form) }}
+
+      <input type="submit" value="{{ action }}"></p>
+  </form>
+
+{% endblock form %}
+{% endblock content %}
