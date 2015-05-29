@@ -1,8 +1,11 @@
 __author__ = 'piotr'
 from .models import *
 from httplib import NOT_FOUND, BAD_REQUEST
-from flask import render_template, request, Blueprint, jsonify, redirect, flash
+from flask import render_template, request, Blueprint, jsonify, redirect, flash, g
 from .forms import *
+from flask.ext.login import login_user, logout_user, current_user, login_required
+from auth import *
+from app import app
 
 blueprint_catalog = Blueprint('catalog', __name__, url_prefix="/catalog")
 blueprint_api = Blueprint('api', __name__, url_prefix='/api')
@@ -39,6 +42,10 @@ def get_item(item_id):
 
 
 # WEB
+@blueprint_catalog.before_request
+def before_request():
+    g.user = current_user
+
 @blueprint_catalog.context_processor
 def utility_processor():
     return dict(
@@ -78,7 +85,7 @@ def add_item():
     form = AddItemForm()
 
     if form.validate_on_submit():
-        form_category = CatalogDAO.category_with_id(form.category.data)
+        form_category = CatalogDAO.category_with_id(form.category_id.data)
         form_item = Item(form.name.data, form.description.data)
         form_category.add_item(form_item)
         return redirect(url_for('catalog.home'))
@@ -133,3 +140,46 @@ def delete_category():
         return redirect(url_for('catalog.home'))
 
     return render_template('delete_category.html', form=form)
+
+@blueprint_catalog.route('/login')
+def login():
+    if g.user is not None and g.user.is_authenticated():
+        return redirect(url_for('.home'))
+    return render_template('login.html')
+
+@blueprint_catalog.route('/authorize/<provider>')
+def oauth_authorize(provider):
+    # Flask-Login function
+    if not current_user.is_anonymous():
+        return redirect(url_for('index'))
+    oauth = OAuthSignIn.get_provider(provider)
+    return oauth.authorize()
+
+@app.route('/callback/<provider>')
+def oauth_callback(provider):
+    if not current_user.is_anonymous():
+        return redirect(url_for('index'))
+    oauth = OAuthSignIn.get_provider(provider)
+    username, email = oauth.callback()
+    if email is None:
+        # I need a valid email address for my user identification
+        flash('Authentication failed.')
+        return redirect(url_for('index'))
+    # Look if the user already exists
+    user=User.query.filter_by(email=email).first()
+    if not user:
+        # Create the user. Try and use their name returned by Google,
+        # but if it is not set, split the email address at the @.
+        nickname = username
+        if nickname is None or nickname == "":
+            nickname = email.split('@')[0]
+
+        # We can do more work here to ensure a unique nickname, if you
+        # require that.
+        user=User(nickname=nickname, email=email)
+        db.session.add(user)
+        db.session.commit()
+    # Log in the user, by default remembering them for their next visit
+    # unless they log out.
+    login_user(user, remember=True)
+    return redirect(url_for('index'))

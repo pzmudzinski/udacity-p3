@@ -4,6 +4,7 @@ from flask_marshmallow import Marshmallow
 # Import SQLAlchemy
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask_debugtoolbar import DebugToolbarExtension
+from flask.ext.login import LoginManager
 
 # Define the WSGI application object
 app = Flask(__name__)
@@ -18,6 +19,8 @@ app.config.from_object('config')
 db = SQLAlchemy(app)
 marshmallow = Marshmallow(app)
 toolbar = DebugToolbarExtension(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
 
 from app.mod_catalog.views import blueprint_catalog as blueprint_catalog
 from app.mod_catalog.views import blueprint_api as blueprint_api

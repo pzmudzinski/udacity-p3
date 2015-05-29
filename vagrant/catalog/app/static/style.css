@@ -1,0 +1,82 @@
+/*a:hover, a:visited, a:link, a:active {*/
+    /*text-decoration: none;*/
+/*}*/
+
+/*a {*/
+    /*color: white;*/
+    /*cursor: pointer;*/
+/*}*/
+
+/*.topbar {*/
+    /*height: 50px;*/
+    /*background-color: #3F334D;*/
+/*}*/
+
+/*body {*/
+    /*background-color: #C0C5C1;*/
+/*}*/
+
+/*.topbar .topbar-wrapper {*/
+    /*width: 1000px;*/
+    /*position: relative;*/
+    /*margin: 0 auto;*/
+    /*padding-top: 10px;*/
+/*}*/
+
+/*.topbar .home {*/
+    /*display: inline-block;*/
+    /*vertical-align: top;*/
+    /*font-size: 20px;*/
+    /*font-weight: bold;*/
+/*}*/
+
+/*.topbar .login {*/
+    /*top: 0px;*/
+    /*right: 15px;*/
+    /*position: absolute;*/
+    /*vertical-align: top;*/
+/*}*/
+
+/*.header {*/
+    /*background-color: #574B60;*/
+    /*width: 1000px;*/
+    /*margin: 0 auto;*/
+    /*padding: 10px;*/
+/*}*/
+
+/*.header a {*/
+    /*padding: 5px;*/
+    /*line-height: 1.5;*/
+    /*background-color: #3F334D;*/
+    /*display: inline-block;*/
+    /*margin-bottom: 10px;*/
+
+    /*-webkit-transition: background, 0.15s, ease;*/
+    /*-moz-transition: background, 0.15s, ease;*/
+    /*-ms-transition: background, 0.15s, ease;*/
+    /*-o-transition: background, 0.15s, ease;*/
+/*}*/
+
+/*.header a:hover {*/
+    /*background-color: #7D8491;*/
+/*}*/
+
+/*.content {*/
+    /*background-color: #7D8491;*/
+/*}*/
+
+/*.wrapper {*/
+    /*width: 1000px;*/
+    /*margin: 0 auto;*/
+/*}*/
+
+/*.menu {*/
+    /*width: 100px;*/
+    /*margin: 0 0;*/
+/*}*/
+
+/*.menu ul {*/
+    /*margin: 0px;*/
+    /*padding: 0px;*/
+/*}*/
+

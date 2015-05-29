@@ -30,3 +30,13 @@ CSRF_SESSION_KEY = "secret"
 SECRET_KEY = "secret"
 
 DEBUG_TB_INTERCEPT_REDIRECTS = False
+
+GOOGLE_LOGIN_CLIENT_ID = "696521699443-fqrn1a3gvic2q4hkf6ll5pnq6tgqmvln.apps.googleusercontent.com"
+GOOGLE_LOGIN_CLIENT_SECRET = "xp8H30QxrnHPWhZrzusMTqr4"
+
+OAUTH_CREDENTIALS={
+        'google': {
+            'id': GOOGLE_LOGIN_CLIENT_ID,
+            'secret': GOOGLE_LOGIN_CLIENT_SECRET
+        }
+}
