@@ -7,6 +7,7 @@ from sqlalchemy.exc import IntegrityError
 from sqlalchemy.exc import SQLAlchemyError
 from marshmallow import fields, Schema, ValidationError
 
+
 class CatalogModel(db.Model):
     __abstract__ = True
     id = db.Column(db.Integer, primary_key=True)
@@ -74,9 +75,11 @@ class Item(CatalogModel):
     def __repr__(self):
         return self.name
 
+
 def must_not_be_blank(data):
     if not data:
         raise ValidationError('Data not provided.')
+
 
 class CategorySchema(marshmallow.Schema):
     items_count = fields.Function(lambda obj: obj.get_number_of_items())
@@ -88,6 +91,7 @@ class CategorySchema(marshmallow.Schema):
         fields = ('id', 'name', 'items_count', 'items', 'url')
         # Smart hyperlinking
 
+
 class ItemSchema(marshmallow.Schema):
     category = fields.Nested(CategorySchema, exclude=['items'])
     url = fields.Function(lambda category: category.url)
@@ -95,6 +99,7 @@ class ItemSchema(marshmallow.Schema):
 
     class Meta:
         fields = ('id', 'name', 'description', 'category_id', 'url')
+
 
 class CatalogDAO(object):
     # Categories methods

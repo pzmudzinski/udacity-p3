@@ -18,24 +18,24 @@ def get_all_categories():
 @blueprint_api.route('/category/<category_id>')
 def get_category(category_id):
     print request.path
-    category = CatalogDAO.category_with_id(category_id)
-    if category is None:
+    _category = CatalogDAO.category_with_id(category_id)
+    if _category is None:
         return jsonify({
             "error": "Category could not be found."
         }), NOT_FOUND
 
-    return jsonify(category_schema.dump(category).data)
+    return jsonify(category_schema.dump(_category).data)
 
 @blueprint_api.route('/item/<item_id>')
 def get_item(item_id):
     print request.path
-    item = Item.query.get(item_id)
-    if item is None:
+    _item = Item.query.get(item_id)
+    if _item is None:
         return jsonify({
             "error": "Item could not be found."
         }), NOT_FOUND
 
-    return jsonify(item_schema.dump(item).data)
+    return jsonify(item_schema.dump(_item).data)
 
 
 # WEB
@@ -88,13 +88,13 @@ def add_item():
 @blueprint_catalog.route('/item/<item_id>/edit', methods=['GET', 'POST'])
 def edit_item(item_id):
     form_item = CatalogDAO.item_with_id(item_id)
-    form = AddItemForm()
-    form.name = form_item.name
-    form.category.data = form_item.category.name
-    form.description = form.description
+    form = AddItemForm(obj=form_item)
 
-    if form.is_submitted():
+    if form.validate_on_submit():
+        print form
+        form.populate_obj(form_item)
         session_commit()
+        return redirect(url_for('.item', item_id=item_id))
 
     return render_template('add_item.html', form=form, action="Edit")
 
