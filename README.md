@@ -6,6 +6,6 @@ Installation:
 > cd vagrant  
 > vagrant up  
 > vagrant ssh  
-> pip install coverage Flask-Login flask-marshmallow Flask-SQLAlchemy Flask-WTF rauth
-> cd catalog
+> pip install coverage Flask-Login flask-marshmallow Flask-SQLAlchemy Flask-WTF rauth  
+> cd catalog  
 > python run.py
