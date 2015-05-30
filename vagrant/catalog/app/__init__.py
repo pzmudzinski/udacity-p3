@@ -1,4 +1,3 @@
-
 from flask import Flask, redirect
 from flask_marshmallow import Marshmallow
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -32,11 +31,14 @@ from app.mod_catalog.models import *
 db.drop_all()
 db.create_all()
 import db_create
+
 db_create.add_sample_categories()
+
 
 @login_manager.user_loader
 def load_user(userid):
     return User.query.get(userid)
+
 
 @login_manager.unauthorized_handler
 def unauthorized_callback():

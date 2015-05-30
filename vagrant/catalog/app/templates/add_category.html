@@ -4,13 +4,13 @@
 {% block content %}
 {% block form %}
 <h1>{{ action }} Category</h1>
-  <form method="POST" >
-      {{ form.hidden_tag() }}
+<form method="POST">
+    {{ form.hidden_tag() }}
 
-      {{ forms.render(form) }}
+    {{ forms.render(form) }}
 
-      <input type="submit" value="{{ action }}"></p>
-  </form>
+    <input type="submit" value="{{ action }}"></p>
+</form>
 
 {% endblock form %}
 {% endblock content %}

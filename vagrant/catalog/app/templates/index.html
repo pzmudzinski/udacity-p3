@@ -1,13 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>LATEST ITEMS</h1>
-    <ul>
+<h1>LATEST ITEMS</h1>
+<ul>
     {% for item in items %}
-    <li><a href="{{ url_for('.item', item_id=item.id) }}" target="_self"> {{ item.name }} </a> ( {{ item.category.name }} )</li>
+    <li><a href="{{ url_for('.item', item_id=item.id) }}" target="_self"> {{ item.name }} </a> ( {{ item.category.name
+        }} )
+    </li>
     {% endfor %}
 
-    </ul>
-    <!--{% for post in posts %}-->
-    <!--<div><p>{{ post.author.nickname }} says: <b>{{ post.body }}</b></p></div>-->
-    <!--{% endfor %}-->
+</ul>
 {% endblock %}

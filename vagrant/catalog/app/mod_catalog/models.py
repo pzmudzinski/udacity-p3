@@ -54,21 +54,6 @@ class User(db.Model):
             db.session.commit()
         return user
 
-    def is_active(self):
-        return True
-
-    def is_authenticated(self):
-        """
-        Returns `True`. User is always authenticated. Herp Derp.
-        """
-        return True
-
-    def is_anonymous(self):
-        """
-        Returns `False`. There are no Anonymous here.
-        """
-        return False
-
     def get_id(self):
         """
         Assuming that the user object has an `id` attribute, this will take
