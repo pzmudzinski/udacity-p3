@@ -1,13 +1,13 @@
 __author__ = 'piotr'
 from app import db
-from sqlalchemy.exc import IntegrityError
 from app import marshmallow
 from flask import url_for
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.exc import SQLAlchemyError
-from marshmallow import fields, Schema, ValidationError
+from marshmallow import fields, ValidationError
 from flask.ext.login import UserMixin
 from sqlalchemy.orm.exc import NoResultFound
+
 
 class User(db.Model):
     __tablename__ = 'catalog_users'
@@ -251,18 +251,6 @@ class CatalogDAO(object):
     def latest_items(limit=10):
         q = Item.query.order_by(Item.date_created.desc()).limit(limit)
         return q.all()
-
-
-from datetime import datetime
-import json
-
-
-class DateTimeEncoder(json.JSONEncoder):
-    def default(self, o):
-        if isinstance(o, datetime):
-            return o.isoformat()
-
-        return json.JSONEncoder.default(self, o)
 
 
 def session_commit():
