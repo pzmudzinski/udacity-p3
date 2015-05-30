@@ -54,6 +54,16 @@ class User(db.Model):
             db.session.commit()
         return user
 
+    def is_active(self):
+        return True
+
+    def is_authenticated(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+
     def get_id(self):
         """
         Assuming that the user object has an `id` attribute, this will take
